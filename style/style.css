@@ -1,0 +1,70 @@
+#tittle {
+  text-align: center;
+}
+
+#board {
+  text-align: center;
+}
+
+#settings {
+  text-align: left;
+}
+
+#gameboard {
+  border-style: outset;
+  border-radius: 7%;
+  background-color: royalblue;
+  display: inline-block;
+}
+
+.row {
+  margin: 8px 0 8px 0;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  background-color: white;
+  border-style: inset;
+  border-radius: 50%;
+  margin: 0 10px 0 10px;
+}
+
+.cell.empty {
+  border-style: inset;
+  border-color: lightsteelblue;
+  cursor: pointer;
+}
+
+.future-red {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.future-yellow {
+  background-color: rgba(255, 255, 0, 0.6);
+}
+
+.cell.red {
+  background-color: red;
+}
+
+.cell.yellow {
+  background-color: yellow;
+}
+
+@media (max-width: 1400px) {
+  .cell {
+    width: 80px;
+    height: 80px;
+    margin: 0 8px 0 8px;
+  }
+}
+
+@media (max-width: 1070px) {
+  .cell {
+    width: 40px;
+    height: 40px;
+    margin: 0 4px 0 4px;
+  }
+}

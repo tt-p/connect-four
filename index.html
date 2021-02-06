@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>Connect 4</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      AppConfig = {
+        N: 4,
+        FPS: 60
+      }
+      Game = {
+        NONE: 0,
+        PLAYER_ONE: 1,
+        PLAYER_TWO: 2,
+        DRAW: 3
+      }
+      PlayerColor = {
+        1: "red",
+        2: "yellow"
+      }
+    </script>
+    <script src="script/GameState.js"></script>
+    <script src="script/GameBoard.js"></script>
+    <script src="script/ConnectN.js"></script>
+    <script src="script/Main.js"></script>
+  </head>
+  <body>
+    <div class="container-fluid p-1">
+      <div class="row">
+        <div id="tittle"  class="col-12 pb-4">
+          <h1>Connect 4 Game</h1>
+        </div>
+        <div id="board" class="col-sm-12 col-md-6 col-lg-8">
+          <div id="gameboard"></div>
+        </div>
+        <div id="settings" class="col-sm-12 col-md-6 col-lg-4 p-1">
+          <div id="info" class="alert alert-danger" role="alert">
+            It's Player One's turn!
+          </div>
+          <hr/>
+          <div class="form-floating">
+            <select id="playerOne" class="form-select">
+              <option selected value="0">Human</option>
+              <option disabled value="1">Minimax</option>
+              <option disabled value="2">Alpha–beta</option>
+              <option disabled value="3">Random</option>
+            </select>
+            <label for="playerOne">Player One</label>
+          </div>
+          <br>
+          <div class="form-floating">
+            <select id="playerTwo" class="form-select">
+              <option selected value="0">Human</option>
+              <option disabled value="1">Minimax</option>
+              <option disabled value="2">Alpha–beta</option>
+              <option disabled value="3">Random</option>
+            </select>
+            <label for="playerTwo">Player Two</label>
+          </div>
+          <hr/>
+          <div class="container">
+            <div class="row">
+              <div class="col-10 justify-content-end">
+                <button id="btnStart" class="btn btn-success">Start</button>
+                <button id="btnRestart" class="btn btn-secondary">Restart</button>
+                <button id="btnStop" class="btn btn-danger">Stop</button>
+                
+              </div>
+              <div class="col-2 justify-content-start">
+                <button id="btnUndo" class="btn btn-primary">Undo</button>
+              </div>
+            </div>           
+          </div>     
+        </div>
+      </div>
+    </div>   
+  </body>
+</html>

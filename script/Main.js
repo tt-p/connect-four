@@ -13,6 +13,14 @@ $(document).ready(function() {
     clearInterval(up);
   }
 
+  $('#playerOne').change(function() {
+    connect4.players[Game.PLAYER_ONE] = parseInt($(this).val());
+  })
+
+  $('#playerTwo').change(function() {
+    connect4.players[Game.PLAYER_TWO] = parseInt($(this).val());
+  })
+
   $('#btnStart').click(function() {
     connect4.Start();
     up = setInterval(Start, 10000 / AppConfig.FPS);

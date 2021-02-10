@@ -5,31 +5,54 @@ class ConnectN {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.gameState = new GameState(width, height);
-        this.gameBoard = new GameBoard('#gameboard', width, height);
+        this.gameBoard = new GameBoard(selector, width, height);
+        this.players = [];
+        this.players[Game.PLAYER_ONE] = PlayerType.Human;
+        this.players[Game.PLAYER_TWO] = PlayerType.Human;
+        this.stopped = true;
         this.over = false;
     }
 
-    GetHumanAction() {
-        if (this.gameBoard.humanAction != -1 && this.gameState.IsLegalAction(this.gameBoard.humanAction)) {
-            this.gameState.DoAction(this.gameBoard.humanAction);
-            this.gameBoard.player = this.gameState.player;
+    Action(type) {
+        var action = -1;
+        switch(type) {
+            case PlayerType.Human:
+                if (this.gameBoard.humanAction != -1 && this.gameState.IsLegalAction(this.gameBoard.humanAction)) {
+                    action = this.gameBoard.humanAction; 
+                    this.gameBoard.humanAction = -1;
+                }
+                break;
+            case PlayerType.Minimax:
+
+                break;
+            case PlayerType.AlphaBeta:
+
+                break;
+            case PlayerType.Random:
+                const actions = this.gameState.GetLegalActions();
+                const rnd = parseInt(Math.random()*actions.length-1)
+                action = actions[rnd];
+                break;
+        }
+        if (action != -1) {
+            this.gameState.DoAction(action);
             const last = this.gameState.actionHist[this.gameState.actionHist.length-1];
-            this.gameBoard.DrawAction(last[0], last[1], last[2]);
-            this.gameBoard.humanAction = -1;
+            this.gameBoard.DrawAction(last[0], last[1]);
         }
     }
 
     Start() {
         this.over = false;
+        this.stopped = false;
         this.gameBoard.input = true;
     }
 
     Update() {
-        if (this.over) { return; }
+        if (this.over || this.stopped) { return; }
         const res = this.gameState.GetWinner();
         if (res == Game.NONE) {
             this.ChangeInfo(this.gameState.player);
-            this.GetHumanAction();
+            this.Action(this.players[this.gameState.player]);
         }
         else {
             this.GameOver(res);
@@ -37,20 +60,25 @@ class ConnectN {
     }
 
     Stop() {
-        this.gameBoard.input = false;
+        this.stopped = true;
+        this.gameBoard.input = false;       
     }
 
     Restart() {
         this.gameState = new GameState(this.WIDTH, this.HEIGHT);
-        this.gameBoard = new GameBoard('#gameboard', this.WIDTH, this.HEIGHT);
+        this.gameBoard.ClearBoard();
+        this.Start();
     }
 
     Undo() {
         if (this.gameState.actionHist.length > 0) {
             const last = this.gameState.actionHist[this.gameState.actionHist.length-1];
-            this.gameBoard.EraseAction(last[0], last[1], last[2]);
+            this.gameBoard.EraseAction(last[0], last[1]);
             this.gameState.UndoAction();
-            this.gameBoard.player = this.gameState.player;
+            if (this.over) {
+                this.over = false;
+                this.gameBoard.input = true;
+            }
         }
     }
 
@@ -96,5 +124,4 @@ class ConnectN {
         this.gameBoard.input = false;
         this.over = true;
     }
-
 }

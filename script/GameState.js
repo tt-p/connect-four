@@ -44,12 +44,12 @@ class GameState {
 
     IsLegalAction(x) {
         return x >= 0 && x < this.WIDTH && 
-               this.colFullness[x] < this.HEIGHT;
+        this.colFullness[x] < this.HEIGHT;
     }
 
     GetLegalActions() {
         return Array.from(Array(this.WIDTH).keys())
-        .filter(this.IsLegalAction);
+        .filter(x => this.IsLegalAction(x));
     }
 
     DoAction(x) {

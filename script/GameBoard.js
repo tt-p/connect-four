@@ -54,6 +54,7 @@ class GameBoard {
             const x = $(this).data('x');
             const $lastEmptyCell = getLastEmptyCell(x);
             $lastEmptyCell.addClass(`future-${PlayerColor[board.player]}`);
+            console.log(board.player);
         })
 
         $board.on('mouseleave', '.cell', function () {
@@ -62,21 +63,26 @@ class GameBoard {
 
         $board.on('click', '.cell.empty', function () {
             if (!board.input) { return; }
-            const x = $(this).data('x');          
-            $(this).trigger('mouseenter');
+            const x = $(this).data('x');
             board.humanAction = x;
         })
     }
 
-    DrawAction(x, y, player) {
-        const $cell = $(`.cell[data-x='${x}'][data-y='${y}']`);
-        $cell.removeClass(`empty future-${PlayerColor[player]}`);
-        $cell.addClass(PlayerColor[player]);
+    ClearBoard() {
+        this.#init();
     }
 
-    EraseAction(x, y, player) {
+    DrawAction(x, y) {
         const $cell = $(`.cell[data-x='${x}'][data-y='${y}']`);
-        $cell.removeClass(`${PlayerColor[player]}`);
+        $cell.removeClass(`empty future-${PlayerColor[this.player]}`);
+        $cell.addClass(PlayerColor[this.player]);
+        this.player = (this.player == Game.PLAYER_ONE) ? Game.PLAYER_TWO : Game.PLAYER_ONE;
+    }
+
+    EraseAction(x, y) {
+        this.player = (this.player == Game.PLAYER_ONE) ? Game.PLAYER_TWO : Game.PLAYER_ONE;
+        const $cell = $(`.cell[data-x='${x}'][data-y='${y}']`);
+        $cell.removeClass(`${PlayerColor[this.player]}`);
         $cell.addClass('empty');
     }
 

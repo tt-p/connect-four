@@ -15,6 +15,12 @@
         PLAYER_TWO: 2,
         DRAW: 3
       }
+      PlayerType = {
+        Human: 0,
+        Minimax: 1,
+        AlphaBeta: 2,
+        Random: 3
+      }
       PlayerColor = {
         1: "red",
         2: "yellow"
@@ -23,6 +29,7 @@
     <script src="script/GameState.js"></script>
     <script src="script/GameBoard.js"></script>
     <script src="script/ConnectN.js"></script>
+    <script src="script/Minimax.js"></script>
     <script src="script/Main.js"></script>
   </head>
   <body>
@@ -44,7 +51,7 @@
               <option selected value="0">Human</option>
               <option disabled value="1">Minimax</option>
               <option disabled value="2">Alpha–beta</option>
-              <option disabled value="3">Random</option>
+              <option value="3">Random</option>
             </select>
             <label for="playerOne">Player One</label>
           </div>
@@ -54,7 +61,7 @@
               <option selected value="0">Human</option>
               <option disabled value="1">Minimax</option>
               <option disabled value="2">Alpha–beta</option>
-              <option disabled value="3">Random</option>
+              <option value="3">Random</option>
             </select>
             <label for="playerTwo">Player Two</label>
           </div>

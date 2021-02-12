@@ -73,11 +73,11 @@ class GameState {
         }
     }
 
-    CheckWin(x, y, d0, d1, n) {
+    CheckWin(x, y, dx, dy, n) {
         const player = this.GetValue(x,y);
         if (player != Game.NONE) {  
             for (let i = 0; i < n - 1; i++) {
-                x += d0; y += d1;
+                x += dx; y += dy;
                 if (!this.IsValid(x, y) || this.GetValue(x, y) != player) { return false; }
             }
             return true;

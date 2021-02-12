@@ -13,7 +13,7 @@ class ConnectN {
         this.over = false;
     }
 
-    Action(type) {
+    Action(type, player) {
         var action = -1;
         switch(type) {
             case PlayerType.Human:
@@ -23,7 +23,8 @@ class ConnectN {
                 }
                 break;
             case PlayerType.Minimax:
-
+                var minimax = new Minimax(Evaluation.Counter, this.gameState, SearchDepth[player]);         
+                action = minimax.GetAction();
                 break;
             case PlayerType.AlphaBeta:
 
@@ -49,13 +50,13 @@ class ConnectN {
 
     Update() {
         if (this.over || this.stopped) { return; }
-        const res = this.gameState.GetWinner();
-        if (res == Game.NONE) {
+        const result = this.gameState.GetWinner();
+        if (result == Game.NONE) {
             this.ChangeInfo(this.gameState.player);
-            this.Action(this.players[this.gameState.player]);
+            this.Action(this.players[this.gameState.player], this.gameState.player);
         }
         else {
-            this.GameOver(res);
+            this.GameOver(result);
         }
     }
 

@@ -54,7 +54,6 @@ class GameBoard {
             const x = $(this).data('x');
             const $lastEmptyCell = getLastEmptyCell(x);
             $lastEmptyCell.addClass(`future-${PlayerColor[board.player]}`);
-            console.log(board.player);
         })
 
         $board.on('mouseleave', '.cell', function () {

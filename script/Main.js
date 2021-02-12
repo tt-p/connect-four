@@ -14,11 +14,31 @@ $(document).ready(function() {
   }
 
   $('#playerOne').change(function() {
-    connect4.players[Game.PLAYER_ONE] = parseInt($(this).val());
+    const type = parseInt($(this).val());
+    connect4.players[Game.PLAYER_ONE] = type;
+    if (type == PlayerType.Human || type == PlayerType.Random) {
+      $('#div-depthOne').addClass('invisible');
+    }
+    else { $('#div-depthOne').removeClass('invisible'); }
   })
 
   $('#playerTwo').change(function() {
-    connect4.players[Game.PLAYER_TWO] = parseInt($(this).val());
+    const type = parseInt($(this).val());
+    connect4.players[Game.PLAYER_TWO] = type;
+    if (type == PlayerType.Human || type == PlayerType.Random) {
+      $('#div-depthTwo').addClass('invisible');
+    }
+    else { $('#div-depthTwo').removeClass('invisible'); }
+  })
+
+  $('#depthOne').on('input', function() {
+    $('#out-depthOne').val(this.value);
+    SearchDepth[Game.PLAYER_ONE] = this.value;
+  })
+
+  $('#depthTwo').on('input', function() {
+    $('#out-depthTwo').val(this.value);
+    SearchDepth[Game.PLAYER_TWO] = this.value;
   })
 
   $('#btnStart').click(function() {

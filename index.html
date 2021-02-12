@@ -25,10 +25,15 @@
         1: "red",
         2: "yellow"
       }
+      SearchDepth = {
+        1: 3,
+        2: 3
+      }
     </script>
     <script src="script/GameState.js"></script>
     <script src="script/GameBoard.js"></script>
     <script src="script/ConnectN.js"></script>
+    <script src="script/Evaluation.js"></script>
     <script src="script/Minimax.js"></script>
     <script src="script/Main.js"></script>
   </head>
@@ -49,30 +54,42 @@
           <div class="form-floating">
             <select id="playerOne" class="form-select">
               <option selected value="0">Human</option>
-              <option disabled value="1">Minimax</option>
+              <option value="1">Minimax</option>
               <option disabled value="2">Alpha–beta</option>
               <option value="3">Random</option>
             </select>
             <label for="playerOne">Player One</label>
           </div>
           <br>
+          <div id="div-depthOne" class="invisible">
+            <label for="lbl-depthOne" class="form-label badge bg-primary text-wrap"> Search Depth </label>
+            <output id="out-depthOne" class="text-primary fw-bold badge bg-white text-wrap">3</output>
+            <input id="depthOne" type="range" class="form-range" value="3" min="1" max="50">
+          </div>             
+          <br>
           <div class="form-floating">
             <select id="playerTwo" class="form-select">
               <option selected value="0">Human</option>
-              <option disabled value="1">Minimax</option>
+              <option value="1">Minimax</option>
               <option disabled value="2">Alpha–beta</option>
               <option value="3">Random</option>
             </select>
             <label for="playerTwo">Player Two</label>
           </div>
+          <br>
+          <div id="div-depthTwo" class="invisible">
+            <label for="lbl-depthTwo" class="form-label badge bg-primary text-wrap"> Search Depth </label>
+            <output id="out-depthTwo" class="text-primary fw-bold badge bg-white text-wrap">3</output>
+            <input id="depthTwo" type="range" class="form-range" value="3" min="1" max="50">         
+          </div>
+          <br>
           <hr/>
           <div class="container">
             <div class="row">
               <div class="col-10 justify-content-end">
                 <button id="btnStart" class="btn btn-success">Start</button>
                 <button id="btnRestart" class="btn btn-secondary">Restart</button>
-                <button id="btnStop" class="btn btn-danger">Stop</button>
-                
+                <button id="btnStop" class="btn btn-danger">Stop</button>             
               </div>
               <div class="col-2 justify-content-start">
                 <button id="btnUndo" class="btn btn-primary">Undo</button>

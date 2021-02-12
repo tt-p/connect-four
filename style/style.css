@@ -13,8 +13,13 @@
 #gameboard {
   border-style: outset;
   border-radius: 7%;
+  border-color: lightsteelblue;
   background-color: royalblue;
   display: inline-block;
+}
+
+.invisible {
+  visibility: hidden !important;
 }
 
 .row {

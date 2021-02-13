@@ -4,28 +4,35 @@ class Evaluation {
         const result = state.GetWinner();
         switch(result) {
             case player:
-                return (255 - depth * 0.5);
+                return (1025 - depth * 0.6);
             case Game.DRAW:
                 return 0;
             case Game.NONE:
-                const one = CountConnects(state, depth, Game.PLAYER_ONE);
-                const two = CountConnects(state, depth, Game.PLAYER_TWO);
-                return (player == Game.PLAYER_ONE) ? one - two : two - one;          
+                switch(player) {
+                    case Game.PLAYER_ONE:
+                        return CountConnects(state, depth, Game.PLAYER_ONE, 2, (state.N - 1)) -
+                        CountConnects(state, depth, Game.PLAYER_TWO, (state.N - 2), (state.N - 1));
+                    case Game.PLAYER_TWO:
+                        return CountConnects(state, depth, Game.PLAYER_TWO, 2, (state.N - 1)) -
+                        CountConnects(state, depth, Game.PLAYER_ONE, (state.N - 2), (state.N - 1));
+                }
+                return CountConnects(state, depth, Game.PLAYER_ONE, 2, (state.N - 1)) -
+                CountConnects(state, depth, Game.PLAYER_TWO, (state.N - 2), (state.N - 1));         
         } 
-        return (-255 + depth * 0.6);
+        return (-1025 + depth * 0.8);
 
-        function CountConnects(state, depth, player) {
+        function CountConnects(state, depth, player, start, end) {
             const c = state.combs;
             let score = -depth;
         
-            for (let i = 1; i <= (state.N - 1); i++) {
+            for (let i = start; i <= end; i++) {
                 let count = 0;
                 for (let j = 0; j < c.length; j++) {
                     if (Count(state, player, c[j][0], c[j][1], c[j][2], c[j][3], i)) {
                         count++;
                     }
                 }
-                score += Math.pow(3, i) * count * 0.5;
+                score += Math.pow(4, i) * count * 0.5;
             }    
             return score;
         }

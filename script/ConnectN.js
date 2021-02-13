@@ -27,7 +27,12 @@ class ConnectN {
                 action = minimax.GetAction();
                 break;
             case PlayerType.AlphaBeta:
-
+                var alphabeta = new AlphaBeta(Evaluation.Counter, this.gameState, SearchDepth[player])
+                action = alphabeta.GetAction();
+                break;
+            case PlayerType.IDAlphaBeta:
+                var idAlphabeta = new IDAlphaBeta(Evaluation.Counter, this.gameState, SearchDepth[player])
+                action = idAlphabeta.GetAction();
                 break;
             case PlayerType.Random:
                 const actions = this.gameState.GetLegalActions();
@@ -50,6 +55,8 @@ class ConnectN {
 
     Update() {
         if (this.over || this.stopped) { return; }
+        this.gameBoard.input =
+        this.players[Game.PLAYER_ONE] == PlayerType.Human || this.players[Game.PLAYER_TWO] == PlayerType.Human;
         const result = this.gameState.GetWinner();
         if (result == Game.NONE) {
             this.ChangeInfo(this.gameState.player);

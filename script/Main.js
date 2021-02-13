@@ -17,18 +17,26 @@ $(document).ready(function() {
     const type = parseInt($(this).val());
     connect4.players[Game.PLAYER_ONE] = type;
     if (type == PlayerType.Human || type == PlayerType.Random) {
-      $('#div-depthOne').addClass('invisible');
+      $('#depthOne').attr('disabled', 1);
     }
-    else { $('#div-depthOne').removeClass('invisible'); }
+    else { $('#depthOne').removeAttr('disabled'); }
+    if (type == PlayerType.Human || type == PlayerType.Random || type == PlayerType.Minimax) {
+      $('#timeOne').attr('disabled', 1);
+    }
+    else { $('#timeOne').removeAttr('disabled'); }
   })
 
   $('#playerTwo').change(function() {
     const type = parseInt($(this).val());
     connect4.players[Game.PLAYER_TWO] = type;
     if (type == PlayerType.Human || type == PlayerType.Random) {
-      $('#div-depthTwo').addClass('invisible');
+      $('#depthTwo').attr('disabled', 1);
     }
-    else { $('#div-depthTwo').removeClass('invisible'); }
+    else { $('#depthTwo').removeAttr('disabled'); }
+    if (type == PlayerType.Human || type == PlayerType.Random || type == PlayerType.Minimax) {
+      $('#timeTwo').attr('disabled', 1);
+    }
+    else { $('#timeTwo').removeAttr('disabled'); }
   })
 
   $('#depthOne').on('input', function() {
@@ -39,6 +47,16 @@ $(document).ready(function() {
   $('#depthTwo').on('input', function() {
     $('#out-depthTwo').val(this.value);
     SearchDepth[Game.PLAYER_TWO] = this.value;
+  })
+
+  $('#timeOne').on('input', function() {
+    $('#out-timeOne').val(this.value);
+    TimeLimit[Game.PLAYER_ONE] = this.value;
+  })
+
+  $('#timeTwo').on('input', function() {
+    $('#out-timeTwo').val(this.value);
+    TimeLimit[Game.PLAYER_TWO] = this.value;
   })
 
   $('#btnStart').click(function() {

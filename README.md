@@ -1,5 +1,5 @@
 # Connect Four
-> 2021
+2021
 > Simple Connect Four game. Implemented for Minimax algorithm with Alpha-beta pruning.
 
 ## Please Visit
